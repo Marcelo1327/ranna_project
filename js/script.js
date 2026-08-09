@@ -586,62 +586,37 @@ const openFinal = document.getElementById("open-final");
 const finalScene = document.getElementById("final-scene");
 const music = document.getElementById("bg-music");
 
-if (openFinal && finalScene && music) {
+openFinal.addEventListener("click", () => {
 
-    openFinal.addEventListener("click", () => {
+    // esconde a página atrás
+    document.body.style.overflow = "hidden";
 
-        document.body.style.overflow = "hidden";
+    // abre a cena final
+    finalScene.classList.add("active");
 
-        finalScene.classList.add("active");
-        createFloatingGallery();
+    // inicia a música
+    music.volume = 0;
+    music.play();
 
-        music.volume = 0;
-        music.play();
+    // fade-in da música
+    let volume = 0;
 
-        let volume = 0;
+    const fade = setInterval(() => {
 
-        const fade = setInterval(() => {
+        if(volume >= 0.5){
 
-            if (volume >= 0.5) {
+            clearInterval(fade);
 
-                clearInterval(fade);
+        }else{
 
-            } else {
+            volume += 0.02;
+            music.volume = volume;
 
-                volume += 0.02;
-                music.volume = volume;
+        }
 
-            }
+    },100);
 
-        }, 100);
-        const fadeMusic = setInterval(()=>{
-
-    if(music.volume <= 0.02){
-
-        music.pause();
-
-        clearInterval(fadeMusic);
-
-    }else{
-
-        music.volume -= 0.02;
-
-    }
-
-},200);
-            // Espera a introdução terminar
-        setTimeout(() => {
-        
-            showHighlight();
-        
-            highlightInterval = setInterval(showHighlight, 6000);
-        
-        }, 14000);
-            });
-
-
-
-}
+});
 
 /* ==========================
    GALERIA FLUTUANTE
