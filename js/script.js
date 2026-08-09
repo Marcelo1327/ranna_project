@@ -586,35 +586,48 @@ const openFinal = document.getElementById("open-final");
 const finalScene = document.getElementById("final-scene");
 const music = document.getElementById("bg-music");
 
-openFinal.addEventListener("click", () => {
+openFinal.addEventListener("click", async () => {
 
-    // esconde a página atrás
     document.body.style.overflow = "hidden";
 
-    // abre a cena final
     finalScene.classList.add("active");
 
-    // inicia a música
+    createFloatingGallery();
+
+    // Música
     music.volume = 0;
-    music.play();
 
-    // fade-in da música
-    let volume = 0;
+    try {
 
-    const fade = setInterval(() => {
+        await music.play();
 
-        if(volume >= 0.5){
+        console.log("Música iniciada com sucesso!");
 
-            clearInterval(fade);
+        let volume = 0;
 
-        }else{
+        const fade = setInterval(() => {
 
             volume += 0.02;
+
+            if (volume >= 0.5) {
+
+                volume = 0.5;
+                music.volume = volume;
+
+                clearInterval(fade);
+
+                return;
+            }
+
             music.volume = volume;
 
-        }
+        }, 100);
 
-    },100);
+    } catch (error) {
+
+        console.error("ERRO AO TOCAR A MÚSICA:", error);
+
+    }
 
 });
 
