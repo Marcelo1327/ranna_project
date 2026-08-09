@@ -586,50 +586,72 @@ const openFinal = document.getElementById("open-final");
 const finalScene = document.getElementById("final-scene");
 const music = document.getElementById("bg-music");
 
-openFinal.addEventListener("click", async () => {
+let highlightInterval;
 
-    document.body.style.overflow = "hidden";
+if (openFinal && finalScene && music) {
 
-    finalScene.classList.add("active");
+    openFinal.addEventListener("click", async () => {
 
-    createFloatingGallery();
+        // Trava a página de trás
+        document.body.style.overflow = "hidden";
 
-    // Música
-    music.volume = 0;
+        // Abre a cena final
+        finalScene.classList.add("active");
 
-    try {
+        // CRIA AS FOTOS FLUTUANTES
+        createFloatingGallery();
 
-        await music.play();
+        // Inicia a música
+        music.volume = 0;
 
-        console.log("Música iniciada com sucesso!");
+        try {
 
-        let volume = 0;
+            await music.play();
 
-        const fade = setInterval(() => {
+            let volume = 0;
 
-            volume += 0.02;
+            const fade = setInterval(() => {
 
-            if (volume >= 0.5) {
+                volume += 0.02;
 
-                volume = 0.5;
+                if (volume >= 0.5) {
+
+                    volume = 0.5;
+                    music.volume = volume;
+
+                    clearInterval(fade);
+                    return;
+
+                }
+
                 music.volume = volume;
 
-                clearInterval(fade);
+            }, 100);
 
-                return;
-            }
+        } catch (error) {
 
-            music.volume = volume;
+            console.error("Erro ao tocar música:", error);
 
-        }, 100);
+        }
 
-    } catch (error) {
+        // Espera 14 segundos antes de começar
+        // os destaques das fotos
+        if (!highlightInterval) {
 
-        console.error("ERRO AO TOCAR A MÚSICA:", error);
+            setTimeout(() => {
 
-    }
+                showHighlight();
 
-});
+                highlightInterval =
+                    setInterval(showHighlight, 6000);
+
+            }, 14000);
+
+        }
+
+    });
+
+}
 
 /* ==========================
    GALERIA FLUTUANTE
