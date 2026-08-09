@@ -586,19 +586,19 @@ const openFinal = document.getElementById("open-final");
 const finalScene = document.getElementById("final-scene");
 const music = document.getElementById("bg-music");
 
-let highlightInterval;
+let highlightInterval = null;
+let highlightTimeout = null;
 
 if (openFinal && finalScene && music) {
 
     openFinal.addEventListener("click", async () => {
 
-        // Trava a página de trás
         document.body.style.overflow = "hidden";
 
-        // Abre a cena final
+        // Abre o Arquivo Final
         finalScene.classList.add("active");
 
-        // CRIA AS FOTOS FLUTUANTES
+        // Cria as fotos que passam ao fundo
         createFloatingGallery();
 
         // Inicia a música
@@ -634,20 +634,27 @@ if (openFinal && finalScene && music) {
 
         }
 
-        // Espera 14 segundos antes de começar
-        // os destaques das fotos
-        if (!highlightInterval) {
+        // =====================================
+        // FOTOS QUE GANHAM DESTAQUE
+        // =====================================
 
-            setTimeout(() => {
+        // Começa da primeira lembrança
+        current = 0;
+
+        // Espera 14 segundos depois de abrir o arquivo
+        highlightTimeout = setTimeout(() => {
+
+            // Primeira foto
+            showHighlight();
+
+            // Próximas fotos
+            highlightInterval = setInterval(() => {
 
                 showHighlight();
 
-                highlightInterval =
-                    setInterval(showHighlight, 6000);
+            }, 6000);
 
-            }, 14000);
-
-        }
+        }, 14000);
 
     });
 
