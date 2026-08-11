@@ -13,6 +13,37 @@
 </head>
 
 <body>
+    
+    <div id="access-screen">
+
+    <div class="access-box">
+
+        <span class="access-label">
+            ARQUIVO CONFIDENCIAL
+        </span>
+
+        <h1>ACESSO RESTRITO</h1>
+
+        <p>
+            Digite a chave de acesso para continuar.
+        </p>
+
+        <input
+            type="password"
+            id="access-password"
+            placeholder="Digite a senha"
+            autocomplete="off"
+        >
+
+        <button id="access-button">
+            ACESSAR ARQUIVO
+        </button>
+
+        <p id="access-error"></p>
+
+    </div>
+
+</div>
 
     <div id="moon-container">
         <div id="moon">
@@ -622,7 +653,7 @@ CENA FINAL
 
 
 
-  <div class="final-message">
+    <div id="final-intro">
 
         <h2>Porque, no fim...</h2>
 
@@ -639,16 +670,30 @@ CENA FINAL
     
     <div id="photo-highlight">
 
-    <img id="highlight-image" src="">
+        <img id="highlight-image" src="">
 
-    <div id="highlight-caption">
+        <div id="highlight-caption">
 
 
 
-        <h2 id="highlight-title"></h2>
+            <h2 id="highlight-title"></h2>
 
-        <p id="highlight-text"></p>
+            <p id="highlight-text"></p>
 
+        </div>
+
+    </div>
+
+    <div id="constellation">
+
+    <canvas id="constellation-canvas"></canvas>
+
+    <div id="constellation-message">
+        <span>MINHA CONSTELAÇÃO FAVORITA</span>
+
+        <h1>RANNINHA</h1>
+
+        <p>Feliz aniversário, minha Lua.</p>
     </div>
 
 </div>

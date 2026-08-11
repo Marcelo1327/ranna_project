@@ -585,6 +585,7 @@ letterObserver.observe(letterSection);
 const openFinal = document.getElementById("open-final");
 const finalScene = document.getElementById("final-scene");
 const music = document.getElementById("bg-music");
+const finalIntro = document.getElementById("final-intro");
 
 let highlightInterval = null;
 let highlightTimeout = null;
@@ -597,6 +598,13 @@ if (openFinal && finalScene && music) {
 
         // Abre o Arquivo Final
         finalScene.classList.add("active");
+
+        // Faz a frase inicial sumir depois de 8 segundos
+        setTimeout(() => {
+
+            finalIntro.classList.add("hide");
+
+        }, 8000);
 
         // Cria as fotos que passam ao fundo
         createFloatingGallery();
@@ -638,16 +646,13 @@ if (openFinal && finalScene && music) {
         // FOTOS QUE GANHAM DESTAQUE
         // =====================================
 
-        // Começa da primeira lembrança
         current = 0;
 
         // Espera 14 segundos depois de abrir o arquivo
         highlightTimeout = setTimeout(() => {
 
-            // Primeira foto
             showHighlight();
 
-            // Próximas fotos
             highlightInterval = setInterval(() => {
 
                 showHighlight();
@@ -911,40 +916,494 @@ function showHighlight(){
     const photo = memories[current];
 
     img.src = "assets/fotos/" + photo.file;
-
     title.textContent = photo.title;
-
     text.textContent = photo.text;
-
-
 
     highlight.classList.add("active");
 
-    setTimeout(()=>{
+    const isLastPhoto = current === memories.length - 1;
 
-        highlight.classList.remove("active");
+    if (!isLastPhoto) {
 
-    },4000);
+        // Fotos normais desaparecem depois de 4 segundos
+        setTimeout(() => {
+
+            highlight.classList.remove("active");
+
+        }, 4000);
+
+    }
 
     current++;
 
-if(current === memories.length){
+    if (current === memories.length) {
 
-    // Para na última foto
-    clearInterval(highlightInterval);
+        // Para a troca automática
+        clearInterval(highlightInterval);
 
-    // Espera a pessoa apreciar a última lembrança
+        // A última foto continua visível
+        // e depois inicia o desfecho
+        setTimeout(() => {
+
+            finishExperience();
+
+        }, 12000);
+
+        return;
+    }
+}
+
+const constellation =
+    document.getElementById("constellation");
+
+const constellationCanvas =
+    document.getElementById("constellation-canvas");
+
+const constellationMessage =
+    document.getElementById("constellation-message");
+
+const ctx =
+    constellationCanvas.getContext("2d");
+
+    function resizeConstellationCanvas(){
+
+    constellationCanvas.width =
+        window.innerWidth;
+
+    constellationCanvas.height =
+        window.innerHeight;
+
+}
+
+resizeConstellationCanvas();
+
+window.addEventListener(
+    "resize",
+    resizeConstellationCanvas
+);
+
+const letterPatterns = {
+
+    R:[
+        [0,0],[0,1],[0,2],[0,3],[0,4],
+        [1,0],[2,0],[2,1],[2,2],
+        [1,2],
+        [1,3],[2,4]
+    ],
+
+    A:[
+        [1,0],
+        [0,1],[2,1],
+        [0,2],[1,2],[2,2],
+        [0,3],[2,3],
+        [0,4],[2,4]
+    ],
+
+  N:[
+    [0,0],[0,1],[0,2],[0,3],[0,4],
+
+    [0.75,1],
+    [1.5,2],
+    [2.25,3],
+
+    [3,0],[3,1],[3,2],[3,3],[3,4]
+],
+
+    I:[
+        [0,0],[1,0],[2,0],
+        [1,1],[1,2],[1,3],
+        [0,4],[1,4],[2,4]
+    ],
+
+    H:[
+        [0,0],[0,1],[0,2],[0,3],[0,4],
+        [2,0],[2,1],[2,2],[2,3],[2,4],
+        [1,2]
+    ]
+
+};
+
+function createNamePoints(){
+
+    const word = "RANNINHA";
+
+    const points = [];
+
+    const spacing = 22;
+
+    // Espaço REAL entre uma letra e outra
+    const gap = 35;
+
+
+    // Descobre automaticamente a largura
+    // verdadeira de cada letra
+    function getLetterWidth(letter){
+
+        const pattern = letterPatterns[letter];
+
+        const xs = pattern.map(point => point[0]);
+
+        const minX = Math.min(...xs);
+        const maxX = Math.max(...xs);
+
+        return (maxX - minX) * spacing;
+
+    }
+
+
+    // Calcula a largura total do nome
+    let totalWidth = 0;
+
+    word.split("").forEach((letter, index) => {
+
+        totalWidth += getLetterWidth(letter);
+
+        if(index < word.length - 1){
+            totalWidth += gap;
+        }
+
+    });
+
+
+    // Centraliza RANNINHA
+    let currentX =
+        (window.innerWidth - totalWidth) / 2;
+
+
+    const startY =
+        window.innerHeight * 0.28;
+
+
+    word.split("").forEach((letter, index) => {
+
+        const pattern =
+            letterPatterns[letter];
+
+
+        pattern.forEach(([x,y]) => {
+
+            points.push({
+
+                x:
+                    currentX +
+                    x * spacing,
+
+                y:
+                    startY +
+                    y * spacing
+
+            });
+
+        });
+
+
+        // Avança exatamente a largura
+        // da letra atual
+        currentX +=
+            getLetterWidth(letter);
+
+
+        // Adiciona apenas o espaço entre letras
+        if(index < word.length - 1){
+
+            currentX += gap;
+
+        }
+
+    });
+
+
+    return points;
+
+}
+
+let constellationStars = [];
+
+function prepareConstellation(){
+
+    const targets =
+        createNamePoints();
+
+    constellationStars =
+        targets.map(target => ({
+
+            x:
+                Math.random() *
+                window.innerWidth,
+
+            y:
+                Math.random() *
+                window.innerHeight,
+
+            targetX:target.x,
+
+            targetY:target.y,
+
+            radius:
+                1.5 +
+                Math.random()*1.5
+
+        }));
+
+}
+
+function animateConstellation(){
+
+    ctx.clearRect(
+        0,
+        0,
+        constellationCanvas.width,
+        constellationCanvas.height
+    );
+
+    let finished = true;
+
+    constellationStars.forEach(star => {
+
+        const dx =
+            star.targetX - star.x;
+
+        const dy =
+            star.targetY - star.y;
+
+        star.x += dx * 0.035;
+        star.y += dy * 0.035;
+
+        if(
+            Math.abs(dx) > 1 ||
+            Math.abs(dy) > 1
+        ){
+            finished = false;
+        }
+
+        ctx.beginPath();
+
+ctx.arc(
+    star.x,
+    star.y,
+    star.radius,
+    0,
+    Math.PI * 2
+);
+
+ctx.fillStyle = "rgba(205, 175, 255, .95)";
+
+ctx.shadowBlur = star.radius * 7;
+ctx.shadowColor = "rgba(160, 90, 255, .9)";
+
+ctx.fill();
+
+    });
+
+    if(!finished){
+
+        requestAnimationFrame(
+            animateConstellation
+        );
+
+    }else{
+
+        drawConstellationLines();
+
+        setTimeout(() => {
+
+            constellationMessage
+                .classList
+                .add("show");
+
+        },1200);
+
+    }
+}
+
+function drawConstellationLines(){
+
+    ctx.shadowBlur = 0;
+
+    ctx.strokeStyle =
+        "rgba(170,120,255,.22)";
+
+    ctx.lineWidth = 0.7;
+
+    for(
+        let i = 0;
+        i < constellationStars.length;
+        i++
+    ){
+
+        for(
+            let j = i + 1;
+            j < constellationStars.length;
+            j++
+        ){
+
+            const a =
+                constellationStars[i];
+
+            const b =
+                constellationStars[j];
+
+            const dx = a.x - b.x;
+            const dy = a.y - b.y;
+
+            const distance =
+                Math.sqrt(
+                    dx*dx + dy*dy
+                );
+
+            if(distance < 34){
+
+                ctx.beginPath();
+
+                ctx.moveTo(a.x,a.y);
+
+                ctx.lineTo(b.x,b.y);
+
+                ctx.stroke();
+
+            }
+
+        }
+
+    }
+}
+
+function finishExperience(){
+
+    // Fotos do fundo desaparecem
+    const floatingPhotos =
+        document.querySelectorAll(
+            ".floating-photo"
+        );
+
+    floatingPhotos.forEach(
+        (photo,index) => {
+
+            setTimeout(() => {
+
+                photo.style.opacity = "0";
+
+            }, index * 70);
+
+        }
+    );
+
+    // Última foto permanece um pouco
     setTimeout(() => {
 
-        finishExperience();
+        highlight.classList.remove(
+            "active"
+        );
 
-    }, 12000);
+    },2500);
 
-    return;
+    // Constelação entra
+    setTimeout(() => {
+
+        constellation.classList.add(
+            "active"
+        );
+
+        prepareConstellation();
+
+        animateConstellation();
+
+    },4000);
 
 }
 
+const accessScreen =
+    document.getElementById("access-screen");
+
+const accessPassword =
+    document.getElementById("access-password");
+
+const accessButton =
+    document.getElementById("access-button");
+
+const accessError =
+    document.getElementById("access-error");
+
+
+// TROQUE AQUI PELA SENHA QUE VOCÊ QUISER
+const correctPasswords = [
+    "538",
+    "586",
+    "262708"
+];
+
+
+function unlockSite(){
+
+    const typedPassword =
+        accessPassword.value.trim();
+
+    if(correctPasswords.includes(typedPassword)){
+
+        accessError.textContent = "";
+
+        accessScreen.classList.add("unlocked");
+
+        document.body.style.overflow = "";
+
+    }else{
+
+        accessError.textContent =
+            "Chave de acesso incorreta.";
+
+        accessPassword.value = "";
+
+        accessPassword.focus();
+
+    }
+
 }
 
 
+accessButton.addEventListener(
+    "click",
+    unlockSite
+);
 
+
+accessPassword.addEventListener(
+    "keydown",
+    event => {
+
+        if(event.key === "Enter"){
+            unlockSite();
+        }
+
+    }
+);
+
+const TEST_FINAL = false;
+
+if (TEST_FINAL) {
+
+    window.addEventListener("load", () => {
+
+        document.body.style.overflow = "hidden";
+
+        finalScene.classList.add("active");
+
+        // Esconde introdução
+        if (finalIntro) {
+            finalIntro.classList.add("hide");
+        }
+
+        // Esconde foto em destaque
+        highlight.classList.remove("active");
+
+        // Mostra direto a constelação
+        constellation.classList.add("active");
+
+        prepareConstellation();
+
+        animateConstellation();
+
+    });
+
+}
+
+document.body.style.overflow = "hidden"; 

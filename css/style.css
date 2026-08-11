@@ -29,6 +29,7 @@ body{
     --blue:#1c2541;
     --dark:#050505;
     --card:#101010;
+    --purple:#5f09eb;
 }
 
 /* =========================
@@ -1311,39 +1312,27 @@ FOTO EM DESTAQUE
 
 #highlight-image{
 
-    width:380px;
-    max-width:85vw;
-
-    border-radius:18px;
-
-    border:4px solid var(--gold);
-
-    box-shadow:
-        0 0 60px rgba(255,215,0,.35);
-
-}
-#highlight-image{
-
     width:auto;
-    height: 100%;
-    max-height:600px;
+    height:auto;
 
-    object-fit: contain;
+    max-width:min(380px, 80vw);
+    max-height:50vh;
 
-    border-radius: 20px;
+    object-fit:contain;
+
+    border-radius:20px;
 
     border:4px solid var(--gold);
 
     box-shadow:
         0 0 60px rgba(255,215,0,.35);
 
-    background: #111;
+    background:#111;
 
     transition:
         transform .8s ease,
         opacity .8s ease,
         box-shadow .8s ease;
-
 }
 
 #highlight-caption{
@@ -1502,3 +1491,255 @@ FOTO EM DESTAQUE
     }
 
 }
+
+/* ==========================
+   CONSTELAÇÃO FINAL
+========================== */
+
+#constellation{
+    position:absolute;
+    inset:0;
+
+    z-index:40;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:1.5s ease;
+
+    pointer-events:none;
+}
+
+#constellation.active{
+    opacity:1;
+    visibility:visible;
+}
+
+#constellation-canvas{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+}
+
+#constellation-message{
+    position:absolute;
+
+    left:50%;
+    bottom:8%;
+
+    transform:translateX(-50%) translateY(20px);
+
+    text-align:center;
+
+    opacity:0;
+
+    transition:1.5s ease;
+
+    width:90%;
+}
+
+#constellation-message.show{
+    opacity:1;
+    transform:translateX(-50%) translateY(0);
+}
+
+#constellation-message span{
+    color:var(--purple);
+
+    letter-spacing:5px;
+
+    font-size:.75rem;
+}
+
+#constellation-message h1{
+    margin-top:12px;
+
+    font-family:'Cinzel', serif;
+
+    font-size:clamp(2.5rem,6vw,5rem);
+
+    color:white;
+
+    text-shadow:
+        0 0 15px var(--purple),
+        0 0 35px var(--purple);
+}
+
+#constellation-message p{
+    margin-top:10px;
+
+    color:#ddd;
+
+    font-size:clamp(1rem,2vw,1.3rem);
+}
+
+#final-intro{
+    position:absolute;
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+
+    z-index:25;
+
+    opacity:1;
+
+    transition:
+        opacity 1.5s ease,
+        transform 1.5s ease;
+}
+
+#final-intro.hide{
+    opacity:0;
+    transform:translateY(-20px);
+    pointer-events:none;
+}
+
+#final-intro h2{
+    font-family:'Cinzel', serif;
+    color:white;
+
+    font-size:clamp(2rem,5vw,4rem);
+}
+
+#final-intro p{
+    margin-top:20px;
+
+    color:#ddd;
+    line-height:1.8;
+
+    font-size:clamp(1rem,2vw,1.3rem);
+}
+
+#access-screen{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    background:#050505;
+
+    z-index:999999;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
+}
+
+#access-screen.unlocked{
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+}
+
+.access-box{
+    width:min(500px,90%);
+    padding:45px 35px;
+
+    background:#101010;
+
+    border:1px solid var(--gold);
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 0 50px rgba(212,175,55,.12);
+}
+
+.access-label{
+    color:var(--gold);
+
+    font-size:.75rem;
+
+    letter-spacing:5px;
+}
+
+.access-box h1{
+    margin-top:15px;
+
+    font-family:'Cinzel',serif;
+
+    font-size:clamp(2rem,5vw,3.2rem);
+
+    color:white;
+}
+
+.access-box p{
+    margin-top:15px;
+
+    color:#aaa;
+}
+
+#access-password{
+    width:100%;
+
+    margin-top:30px;
+
+    padding:16px 18px;
+
+    border-radius:10px;
+
+    border:1px solid #333;
+
+    background:#080808;
+
+    color:white;
+
+    outline:none;
+
+    text-align:center;
+
+    font-size:1rem;
+
+    letter-spacing:3px;
+}
+
+#access-password:focus{
+    border-color:var(--gold);
+
+    box-shadow:
+        0 0 20px rgba(212,175,55,.15);
+}
+
+#access-button{
+    width:100%;
+
+    margin-top:18px;
+
+    padding:16px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:var(--gold);
+
+    color:#111;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    cursor:pointer;
+}
+
+#access-error{
+    min-height:24px;
+
+    margin-top:15px;
+
+    color:#d47b7b;
+
+    font-size:.9rem;
+}
+
