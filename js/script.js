@@ -354,70 +354,6 @@ window.addEventListener("scroll", () => {
 
 });
 
-const evidenceData = {
-
-    1: {
-        title: "EVIDÊNCIA #001 — O Cubo Mágico",
-        text: `
-        O primeiro contato registrado ocorreu em um ambiente escolar.
-
-        Um simples cubo mágico foi o elemento inicial de uma conexão
-        que ainda não era compreendida pelos envolvidos.
-
-        Naquele momento, parecia apenas curiosidade.
-        Hoje, é classificado como o início de tudo.
-        `
-    },
-
-    2: {
-        title: "EVIDÊNCIA #002 — A Amizade",
-        text: `
-        Interações frequentes foram registradas após o primeiro contato.
-
-        Conversas, jogos e presença constante indicam
-        formação de vínculo emocional progressivo.
-
-        O objeto analisado passou a ocupar espaço relevante na rotina.
-        `
-    },
-
-    3: {
-        title: "EVIDÊNCIA #003 — O Silêncio",
-        text: `
-        Após o encerramento do ensino médio,
-        houve uma interrupção significativa nos registros.
-
-        O caso foi temporariamente arquivado.
-
-        Nenhum contato relevante foi identificado por um longo período.
-        `
-    },
-
-    4: {
-        title: "EVIDÊNCIA #004 — O Reencontro",
-        text: `
-        Em 2026, o caso foi reaberto.
-
-        Uma nova conexão foi estabelecida através de redes sociais.
-
-        O que parecia encerrado foi reativado instantaneamente.
-        `
-    },
-
-    5: {
-        title: "EVIDÊNCIA CRÍTICA — Era tu, besta",
-        text: `
-        Durante uma conversa informal,
-        uma informação determinante foi revelada.
-
-        A partir deste momento,
-        toda a linha de investigação foi reavaliada.
-
-        O caso deixou de ser apenas observacional.
-        `
-    }
-
-};
 
 const evidenceCards =
     document.querySelectorAll(".evidence");
@@ -467,7 +403,7 @@ RELATÓRIO FINAL
 
 Após meses de observação, análise de evidências, registros históricos e inúmeros momentos compartilhados, a investigação foi concluída.
 
-Objeto analisado: [Nome dela]
+Objeto analisado: RANNA
 
 Resultado:
 
@@ -489,7 +425,7 @@ As observações se transformaram em admiração.
 
 A admiração se transformou em orgulho.
 
-E o orgulho se transformou na certeza de que você é uma das pessoas mais especiais que já passaram pela minha vida.
+E o orgulho se transformou na certeza de que você é a pessoa mais especial que já passou pela minha vida.
 
 Esta investigação começou tentando descobrir quem você é.
 
@@ -672,7 +608,7 @@ if (openFinal && finalScene && music) {
 const gallery =
 document.getElementById("floating-gallery");
 
-const totalPhotos = 30; // depois altere para a quantidade de fotos
+const totalPhotos = 36; // depois altere para a quantidade de fotos
 
 function createFloatingGallery(){
 
@@ -711,7 +647,7 @@ function createFloatingGallery(){
 const memories = [
 
 {
-    file:"3.jpg",
+    file:"35.jpg",
     title:"O seu sorriso",
     text:"Existem milhares de sorrisos no mundo, mas foi o seu que escolheu morar no meu coração."
 },
@@ -725,23 +661,23 @@ const memories = [
 {
     file:"1.jpg",
     title:"Você chegou",
-    text:"Sem fazer barulho, você entrou na minha vida e, aos poucos, transformou tudo ao seu redor. Hoje é impossível imaginar meus dias sem a sua presença."
+    text:"Sem fazer barulho, você entrou na minha vida e, aos poucos, transformou tudo ao seu redor. Hoje é impossível imaginar meus dias sem você."
 },
 
 {
     file:"4.jpg",
-    title:"Seu abraço",
-    text:"Existem lugares que transmitem paz. Para mim, um deles sempre será o espaço entre os seus braços."
+    title:"Ter você por perto",
+    text:"Descobri que alguns momentos não precisam de nada extraordinário para serem especiais. Às vezes, ter você por perto já é o bastante para fazer um dia comum valer a pena."
 },
 
 {
-    file:"7.jpg",
+    file:"36.jpg",
     title:"Seu olhar",
     text:"Há algo no seu olhar que sempre me faz acreditar que tudo vai dar certo, mesmo quando o mundo parece estar ao contrário."
 },
 
 {
-    file:"10.jpg",
+    file:"3.jpg",
     title:"Nossa história",
     text:"Às vezes penso em quantas pequenas coincidências precisaram acontecer para que nossos caminhos se encontrassem outra vez. Sou grato por cada uma delas."
 },
@@ -801,7 +737,7 @@ const memories = [
 },
 
 {
-    file:"26.jpg",
+    file:"37.jpg",
     title:"Meu maior sonho",
     text:"Entre todos os sonhos que tenho, existe um que supera todos os outros: construir uma vida inteira ao seu lado."
 },
@@ -813,7 +749,7 @@ const memories = [
 },
 
 {
-    file:"8.jpg",
+    file:"31.jpg",
     title:"A paz que encontrei",
     text:"Você chegou sem prometer nada, mas acabou me dando exatamente aquilo que eu mais precisava: paz."
 },
@@ -832,14 +768,14 @@ const memories = [
 
 {
     file:"29.jpg",
-    title:"Seu jeito",
-    text:"Eu me apaixonei pelo seu jeito de enxergar o mundo, pela sua força, pela sua doçura e até pelas pequenas manias que fazem você ser exatamente quem é."
+    title:"O que eu vejo em você",
+    text:"Talvez você nem sempre consiga enxergar tudo o que existe de bonito em você. Mas eu vejo sua determinação, seus sonhos, seu coração e essa vontade de construir algo melhor. E espero que um dia você consiga se enxergar com um pouco dos olhos com que eu te enxergo."
 },
 
 {
-    file:"6.jpg",
+    file:"32.jpg",
     title:"Você merece",
-    text:"Espero que a vida retribua todo o carinho que você entrega ao mundo. E, se ela esquecer, eu faço questão de lembrar todos os dias o quanto você é especial."
+    text:"Espero que a vida retribua todo o carinho que você entrega a mim. E, se ela esquecer, eu faço questão de lembrar todos os dias o quanto você é especial."
 },
 
 {
@@ -867,7 +803,7 @@ const memories = [
 },
 
 {
-    file:"9.jpg",
+    file:"34.jpg",
     title:"O amor mora nos detalhes",
     text:"Talvez você nunca perceba, mas são os pequenos detalhes que me fazem me apaixonar por você todos os dias de novo."
 },
@@ -879,17 +815,15 @@ const memories = [
 },
 
 {
-    file:"5.jpg",
+    file:"33.jpg",
     title:"A melhor coincidência",
     text:"Ainda me impressiona pensar que, entre bilhões de pessoas, a vida resolveu cruzar nossos caminhos outra vez. E foi a melhor coincidência que ela poderia ter criado."
 },
 
 {
-
     file:"22.jpg",
     title:"O começo do nosso para sempre",
-    text:"Todas essas fotos contam um pouco da nossa história. Mas a minha favorita ainda não foi tirada. Ela é aquela em que estaremos, daqui a muitos anos, olhando para tudo isso e sorrindo por termos escolhido um ao outro todos os dias."
-
+    text:"Passei por tantas fotos suas tentando escolher as que poderiam mostrar o quanto você é especial para mim. Mas percebi que a minha favorita ainda nem existe. Ela é aquela em que estaremos, daqui a muitos anos, olhando para tudo o que vivemos e sorrindo por termos escolhido um ao outro todos os dias."
 }
 
 ];
@@ -1407,3 +1341,109 @@ if (TEST_FINAL) {
 }
 
 document.body.style.overflow = "hidden"; 
+
+const notificationTrigger =
+    document.getElementById("notification-trigger");
+
+const storyNotification =
+    document.getElementById("story-notification");
+
+const notificationText =
+    document.getElementById("notification-text");
+
+const receivedMessage =
+    document.getElementById("received-message");
+
+let notificationShown = false;
+
+
+if (
+    notificationTrigger &&
+    storyNotification &&
+    notificationText &&
+    receivedMessage
+) {
+
+    const notificationObserver =
+        new IntersectionObserver(
+            entries => {
+
+                entries.forEach(entry => {
+
+                    if (
+                        entry.isIntersecting &&
+                        !notificationShown
+                    ) {
+
+                        notificationShown = true;
+
+
+                        // 1 - primeira mensagem
+                        setTimeout(() => {
+
+                            storyNotification
+                                .classList
+                                .add("show");
+
+                        }, 900);
+
+
+                        // 2 - troca para "Era tu, besta."
+                        setTimeout(() => {
+
+                            notificationText
+                                .classList
+                                .add("change");
+
+                            setTimeout(() => {
+
+                                notificationText.textContent =
+                                    "Era tu, besta.";
+
+                                notificationText
+                                    .classList
+                                    .remove("change");
+
+                            }, 450);
+
+                        }, 3600);
+
+
+                        // 3 - notificação some
+                        setTimeout(() => {
+
+                            storyNotification
+                                .classList
+                                .remove("show");
+
+                        }, 7000);
+
+
+                        // 4 - conteúdo aparece no corpo
+                        setTimeout(() => {
+
+                            receivedMessage
+                                .classList
+                                .add("show");
+
+                        }, 7800);
+
+
+                        notificationObserver.disconnect();
+
+                    }
+
+                });
+
+            },
+            {
+                threshold:.8,
+                rootMargin:"-25% 0px -25% 0px"
+            }
+        );
+
+    notificationObserver.observe(
+        notificationTrigger
+    );
+
+}
