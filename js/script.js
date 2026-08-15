@@ -368,7 +368,7 @@ const totalPhotos = 31; // depois altere para a quantidade de fotos
 
 function createFloatingGallery(){
 
-    for(let i = 1; i <= totalPhotos; i++){
+    for(let i = 5; i <= totalPhotos; i++){
 
         const img = document.createElement("img");
 
@@ -415,13 +415,13 @@ const memories = [
 },
 
 {
-    file:"1.jpg",
+    file:"5.jpg",
     title:"Você chegou",
     text:"Sem fazer barulho, você entrou na minha vida e, aos poucos, transformou tudo ao seu redor. Hoje é impossível imaginar meus dias sem você."
 },
 
 {
-    file:"4.jpg",
+    file:"8.jpg",
     title:"Ter você por perto",
     text:"Descobri que alguns momentos não precisam de nada extraordinário para serem especiais. Às vezes, ter você por perto já é o bastante para fazer um dia comum valer a pena."
 },
@@ -433,7 +433,7 @@ const memories = [
 },
 
 {
-    file:"3.jpg",
+    file:"7.jpg",
     title:"Nossa história",
     text:"Às vezes penso em quantas pequenas coincidências precisaram acontecer para que nossos caminhos se encontrassem outra vez. Sou grato por cada uma delas."
 },
@@ -547,7 +547,7 @@ const memories = [
 },
 
 {
-    file:"2.jpg",
+    file:"6.jpg",
     title:"Gratidão",
     text:"Obrigado por existir. Parece uma frase simples, mas ela carrega tudo aquilo que às vezes nem as palavras conseguem explicar."
 },
