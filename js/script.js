@@ -22,139 +22,6 @@ document.querySelectorAll(
     observer.observe(el);
 });
 
-/* ==========================
-   ARQUIVOS SECRETOS
-========================== */
-
-const files = document.querySelectorAll(".file");
-
-files.forEach(file => {
-
-    file.addEventListener("click", () => {
-
-        const title = file.textContent;
-
-       const modal =
-    document.getElementById("modal");
-
-const modalTitle =
-    document.getElementById("modal-title");
-
-const modalText =
-    document.getElementById("modal-text");
-
-const closeModal =
-    document.getElementById("close-modal");
-
-const documents = {
-
-    admiracao: {
-        title: "O que admiro em você",
-
-        text: `
-        <p>
-        Eu admiro a forma como você sonha.
-        Não apenas sonha, mas corre atrás.
-        Você quer construir uma vida boa,
-        ter sua casa, viajar e conquistar
-        suas próprias vitórias.
-        </p>
-
-        <p>
-        Sua determinação é uma das coisas
-        mais bonitas que existem em você.
-        </p>
-        `
-    },
-
-    ensinou: {
-        title: "O que você me ensinou",
-
-        text: `
-        <p>
-        Você me ensinou que algumas pessoas
-        entram na nossa vida no momento certo.
-        </p>
-
-        <p>
-        E que às vezes uma história não termina,
-        apenas espera o momento certo para continuar.
-        </p>
-        `
-    },
-
-    naodisse: {
-        title: "Coisas que nunca disse",
-
-        text: `
-        <p>
-        Durante muito tempo eu achei que
-        nossa história tinha ficado para trás.
-        </p>
-
-        <p>
-        Hoje fico feliz por estar completamente
-        enganado.
-        </p>
-        `
-    },
-
-    futuro: {
-        title: "Meu futuro ideal",
-
-        text: `
-        <p>
-        Não sonho com uma vida perfeita.
-        </p>
-
-        <p>
-        Sonho apenas com uma vida cheia
-        de memórias, conquistas e momentos
-        compartilhados com você.
-        </p>
-        `
-    }
-
-};
-
-files.forEach(file => {
-
-    file.addEventListener("click", () => {
-
-        const key =
-            file.dataset.file;
-
-        modalTitle.textContent =
-            documents[key].title;
-
-        modalText.innerHTML =
-            documents[key].text;
-
-        modal.classList.add("active");
-
-    });
-
-});
-
-closeModal.addEventListener("click", () => {
-
-    modal.classList.remove("active");
-
-});
-
-modal.addEventListener("click", e => {
-
-    if(e.target === modal){
-
-        modal.classList.remove("active");
-
-    }
-
-});
-
-    });
-
-});
 
 /* ==========================
    EFEITO DE DIGITAÇÃO
@@ -259,52 +126,7 @@ if (startBtn) {
 
     });
 
-}
-
-/* ==========================
-   GALERIA
-========================== */
-
-const photos = document.querySelectorAll(".photo");
-
-const modal = document.getElementById("photo-modal");
-const modalImg = document.getElementById("modal-image");
-const modalCaption = document.getElementById("modal-caption");
-const closePhoto = document.getElementById("close-photo");
-
-photos.forEach(photo => {
-
-    photo.addEventListener("click", () => {
-
-        // fade out antes de trocar
-        modalImg.style.opacity = 0;
-        modalCaption.style.opacity = 0;
-
-        modal.classList.add("active");
-
-        setTimeout(() => {
-
-            modalImg.src = photo.src;
-            modalCaption.textContent = photo.dataset.caption;
-
-            modalImg.style.opacity = 1;
-            modalCaption.style.opacity = 1;
-
-        }, 200);
-
-    });
-
-});
-
-closePhoto.addEventListener("click", () => {
-    modal.classList.remove("active");
-});
-
-modal.addEventListener("click", (e) => {
-    if(e.target === modal){
-        modal.classList.remove("active");
-    }
-});
+};
 
 /* ==========================
    FASES DA LUA
@@ -330,73 +152,7 @@ window.addEventListener("scroll", () => {
 
 });
 
-window.addEventListener("scroll", () => {
 
-    const scroll =
-        window.scrollY;
-
-    const height =
-        document.body.scrollHeight -
-        window.innerHeight;
-
-    const progress =
-        scroll / height;
-
-    let phase = 0;
-
-    if(progress > 0.2) phase = 1;
-    if(progress > 0.4) phase = 2;
-    if(progress > 0.6) phase = 3;
-    if(progress > 0.8) phase = 4;
-
-    moon.textContent =
-        moonPhases[phase];
-
-});
-
-
-const evidenceCards =
-    document.querySelectorAll(".evidence");
-
-const evidenceModal =
-    document.getElementById("evidence-modal");
-
-const evidenceTitle =
-    document.getElementById("evidence-title");
-
-const evidenceText =
-    document.getElementById("evidence-text");
-
-const closeEvidence =
-    document.getElementById("close-evidence");
-
-evidenceCards.forEach(card => {
-
-    card.addEventListener("click", () => {
-
-        const id = card.dataset.id;
-
-        evidenceTitle.textContent =
-            evidenceData[id].title;
-
-        evidenceText.innerHTML =
-            evidenceData[id].text;
-
-        evidenceModal.classList.add("active");
-
-    });
-
-});
-
-closeEvidence.addEventListener("click", () => {
-    evidenceModal.classList.remove("active");
-});
-
-evidenceModal.addEventListener("click", (e) => {
-    if(e.target === evidenceModal){
-        evidenceModal.classList.remove("active");
-    }
-});
 
 const letterText = `
 RELATÓRIO FINAL
@@ -608,7 +364,7 @@ if (openFinal && finalScene && music) {
 const gallery =
 document.getElementById("floating-gallery");
 
-const totalPhotos = 36; // depois altere para a quantidade de fotos
+const totalPhotos = 31; // depois altere para a quantidade de fotos
 
 function createFloatingGallery(){
 
@@ -1055,99 +811,252 @@ let constellationStars = [];
 
 function prepareConstellation(){
 
-    const targets =
-        createNamePoints();
+    const targets = createNamePoints();
 
-    constellationStars =
-        targets.map(target => ({
+    constellationStars = targets.map((target, index) => {
 
-            x:
-                Math.random() *
-                window.innerWidth,
+        const side = Math.floor(Math.random() * 4);
 
-            y:
-                Math.random() *
-                window.innerHeight,
+        let startX;
+        let startY;
 
-            targetX:target.x,
+        // 0 = esquerda
+        if(side === 0){
+            startX = -150 - Math.random() * 250;
+            startY = Math.random() * window.innerHeight;
+        }
 
-            targetY:target.y,
+        // 1 = direita
+        if(side === 1){
+            startX = window.innerWidth + 150 + Math.random() * 250;
+            startY = Math.random() * window.innerHeight;
+        }
 
-            radius:
-                1.5 +
-                Math.random()*1.5
+        // 2 = topo
+        if(side === 2){
+            startX = Math.random() * window.innerWidth;
+            startY = -150 - Math.random() * 250;
+        }
 
-        }));
+        // 3 = baixo
+        if(side === 3){
+            startX = Math.random() * window.innerWidth;
+            startY = window.innerHeight + 150 + Math.random() * 250;
+        }
+
+        return {
+
+            x: startX,
+            y: startY,
+
+            targetX: target.x,
+            targetY: target.y,
+
+            letter: target.letter,
+            letterIndex: target.letterIndex,
+            pointIndex: target.pointIndex,
+
+            radius: 1.5 + Math.random() * 1.4,
+
+            opacity: 0,
+
+            delay: index * 95,
+
+            arrived: false,
+
+            trail: []
+
+        };
+
+    });
 
 }
 
 function animateConstellation(){
 
-    ctx.clearRect(
-        0,
-        0,
-        constellationCanvas.width,
-        constellationCanvas.height
-    );
+    const startTime = performance.now();
 
-    let finished = true;
+    function frame(){
 
-    constellationStars.forEach(star => {
-
-        const dx =
-            star.targetX - star.x;
-
-        const dy =
-            star.targetY - star.y;
-
-        star.x += dx * 0.035;
-        star.y += dy * 0.035;
-
-        if(
-            Math.abs(dx) > 1 ||
-            Math.abs(dy) > 1
-        ){
-            finished = false;
-        }
-
-        ctx.beginPath();
-
-ctx.arc(
-    star.x,
-    star.y,
-    star.radius,
-    0,
-    Math.PI * 2
-);
-
-ctx.fillStyle = "rgba(205, 175, 255, .95)";
-
-ctx.shadowBlur = star.radius * 7;
-ctx.shadowColor = "rgba(160, 90, 255, .9)";
-
-ctx.fill();
-
-    });
-
-    if(!finished){
-
-        requestAnimationFrame(
-            animateConstellation
+        ctx.clearRect(
+            0,
+            0,
+            constellationCanvas.width,
+            constellationCanvas.height
         );
 
-    }else{
+        const now = performance.now();
 
-        drawConstellationLines();
+        let allArrived = true;
 
-        setTimeout(() => {
+        constellationStars.forEach(star => {
 
-            constellationMessage
-                .classList
-                .add("show");
+            const elapsed =
+                now - startTime - star.delay;
 
-        },1200);
+            if(elapsed < 0){
+                allArrived = false;
+                return;
+            }
+
+            star.opacity += 0.05;
+
+            if(star.opacity > 1){
+                star.opacity = 1;
+            }
+
+            const dx =
+                star.targetX - star.x;
+
+            const dy =
+                star.targetY - star.y;
+
+            const distance =
+                Math.sqrt(
+                    dx * dx +
+                    dy * dy
+                );
+
+
+            // Guarda posições anteriores
+            star.trail.push({
+                x: star.x,
+                y: star.y
+            });
+
+            if(star.trail.length > 13){
+                star.trail.shift();
+            }
+
+
+            // Movimento
+            if(distance > 2){
+
+                star.x += dx * 0.09;
+                star.y += dy * 0.09;
+
+                allArrived = false;
+
+            }else{
+
+                star.x = star.targetX;
+                star.y = star.targetY;
+
+                star.arrived = true;
+
+            }
+
+
+            // ==========================
+            // RASTRO DA ESTRELA CADENTE
+            // ==========================
+
+            if(!star.arrived){
+
+                for(
+                    let i = 0;
+                    i < star.trail.length - 1;
+                    i++
+                ){
+
+                    const a = star.trail[i];
+                    const b = star.trail[i + 1];
+
+                    const progress =
+                        i / star.trail.length;
+
+                    ctx.beginPath();
+
+                    ctx.moveTo(
+                        a.x,
+                        a.y
+                    );
+
+                    ctx.lineTo(
+                        b.x,
+                        b.y
+                    );
+
+                    ctx.strokeStyle =
+                        `rgba(
+                            210,
+                            185,
+                            255,
+                            ${progress * .55}
+                        )`;
+
+                    ctx.lineWidth =
+                        .4 + progress * 2;
+
+                    ctx.stroke();
+
+                }
+
+            }
+
+
+            // ==========================
+            // ESTRELA
+            // ==========================
+
+            ctx.beginPath();
+
+            ctx.arc(
+                star.x,
+                star.y,
+                star.radius,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fillStyle =
+                `rgba(
+                    225,
+                    210,
+                    255,
+                    ${star.opacity}
+                )`;
+
+            ctx.shadowBlur =
+                star.arrived
+                    ? 12
+                    : 25;
+
+            ctx.shadowColor =
+                `rgba(
+                    160,
+                    90,
+                    255,
+                    ${star.opacity}
+                )`;
+
+            ctx.fill();
+
+        });
+
+
+        if(!allArrived){
+
+            requestAnimationFrame(frame);
+
+        }else{
+
+            drawConstellationLines();
+
+            setTimeout(() => {
+
+                constellationMessage
+                    .classList
+                    .add("show");
+
+            },1000);
+
+        }
 
     }
+
+    frame();
+
 }
 
 function drawConstellationLines(){
